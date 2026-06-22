@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500万彩票网 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f6f8fc;
+            color: #1e2a3a;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: #0b1a2f;
+            background-image: radial-gradient(circle at 20% 30%, #1b3350 0%, #0b1a2f 80%);
+            padding: 4rem 2rem 3.5rem;
+            text-align: center;
+            color: #e3edf9;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4f8cf7, #a0c4ff, #4f8cf7);
+            opacity: 0.6;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto 1.2rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: rgba(79, 140, 247, 0.2);
+            border: 1px solid rgba(79, 140, 247, 0.4);
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #b8d4ff;
+            backdrop-filter: blur(4px);
+        }
+
+        /* 正文容器 — 浅色区 */
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+            flex: 1;
+        }
+
+        /* 目录感布局：两列卡片网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+        }
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.8rem 1.8rem 2rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 20, 40, 0.04);
+            transition: box-shadow 0.2s;
+            border: 1px solid #eef2f8;
+        }
+        .card:hover {
+            box-shadow: 0 12px 28px rgba(0, 20, 50, 0.06);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 550;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e6edf6;
+            color: #0b1a2f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card h2 span {
+            font-size: 1.6rem;
+            line-height: 1;
+            opacity: 0.7;
+        }
+
+        .card p {
+            margin-bottom: 0.9rem;
+            font-size: 0.98rem;
+            color: #2b3f57;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card ul li {
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            position: relative;
+            font-size: 0.96rem;
+            color: #2b3f57;
+            border-bottom: 1px dotted #e9eef5;
+        }
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+        .card ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #4f8cf7;
+            font-weight: 500;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #1f6feb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        a:hover {
+            color: #0b4db8;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* 提示区 + 相关信息区用特殊底色 */
+        .note-card {
+            background: #f0f5fe;
+            border-left: 5px solid #4f8cf7;
+            border-radius: 14px;
+            padding: 1.6rem 1.8rem;
+            margin-top: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .note-card p {
+            font-size: 0.97rem;
+            color: #1c3148;
+            margin-bottom: 0.3rem;
+        }
+        .note-card strong {
+            color: #0b1a2f;
+        }
+
+        .related {
+            margin-top: 2rem;
+            padding: 1.5rem 1.8rem;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid #e2ebf5;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.5rem 1.2rem;
+        }
+        .related .label {
+            font-weight: 500;
+            color: #3b5e7a;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        .related .tag {
+            background: #eaf1fc;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #1f3c5a;
+        }
+
+        .faq-mini {
+            margin-top: 2rem;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #eef2f8;
+        }
+        .faq-mini details {
+            border-bottom: 1px solid #e9edf4;
+            padding: 0.7rem 0;
+        }
+        .faq-mini details:last-child {
+            border-bottom: none;
+        }
+        .faq-mini summary {
+            font-weight: 500;
+            color: #0b1a2f;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            font-size: 1rem;
+        }
+        .faq-mini summary::-webkit-details-marker {
+            color: #4f8cf7;
+        }
+        .faq-mini details p {
+            padding: 0.6rem 0.2rem 0.2rem 1.2rem;
+            font-size: 0.95rem;
+            color: #2b3f57;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            font-size: 0.85rem;
+            color: #5a728e;
+            text-align: center;
+            border-top: 1px solid #dce6f0;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 3rem;
+            }
+            .card {
+                padding: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>500万彩票网</h1>
+        <p>信息聚合 · 稳定入口 · 持续更新的知识索引</p>
+        <div class="badge">知识库 · 目录页</div>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            <!-- 说明区 -->
+            <div class="card">
+                <h2><span>📘</span> 页面说明</h2>
+                <p>这是围绕 <a href="https://zh-en-500.com">500万彩票网</a> 整理的轻量知识入口。不追求即时数据，而是将常见概念、结构特点与注意事项统一陈列，方便快速浏览。</p>
+                <p>你可以把它看作一份静态的索引手册——内容经过筛选，侧重稳定和可读性，适合初次接触或需要回顾的用户。</p>
+            </div>
+
+            <!-- 特点 / 结构 -->
+            <div class="card">
+                <h2><span>⚙️</span> 结构特点</h2>
+                <ul>
+                    <li>基于模块化分区，信息层级清晰</li>
+                    <li>主站采用分类导航 + 内容摘要布局</li>
+                    <li>各模块相对独立，便于局部更新</li>
+                    <li>页面整体强调信息可查找性</li>
+                </ul>
+            </div>
+
+            <!-- 使用场景 -->
+            <div class="card">
+                <h2><span>🔍</span> 常见使用场景</h2>
+                <ul>
+                    <li>查阅分类索引与术语说明</li>
+                    <li>了解主要几类信息的组织形式</li>
+                    <li>作为日常浏览的固定起始页</li>
+                    <li>对比不同模块之间的内容侧重</li>
+                </ul>
+            </div>
+
+            <!-- 提示区卡片 -->
+            <div class="card">
+                <h2><span>📌</span> 提示</h2>
+                <p>本页面仅提供结构化概述，不包含实时开奖或交易功能。所有链接指向 <a href="https://zh-en-500.com">500万彩票网</a> 主站，具体内容以主站实际发布为准。</p>
+                <p style="margin-top: 0.8rem;">建议定期核对信息源，保持对页面变动的了解。如有疑问，可参考主站对应版块的说明文档。</p>
+            </div>
+        </div>
+
+        <!-- 相关信息区 -->
+        <div class="note-card">
+            <strong>📎 相关信息</strong>
+            <p>本知识库与 <a href="https://zh-en-500.com">500万彩票网</a> 内容体系对应，涵盖分类索引、术语对照及常见问题摘要。页面版本：2025 · 春。后续将根据主站结构调整不定期修订。</p>
+            <p style="margin-top: 0.6rem;">数据更新频率：每周一次（参考主站公告）。如有新增模块，会在下方“相关标签”中同步补充。</p>
+        </div>
+
+        <!-- 标签式相关信息 -->
+        <div class="related">
+            <span class="label">相关标签</span>
+            <span class="tag">分类索引</span>
+            <span class="tag">术语说明</span>
+            <span class="tag">模块概览</span>
+            <span class="tag">使用指引</span>
+            <span class="tag">信息结构</span>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <section class="faq-mini">
+            <h2 style="font-size: 1.2rem; font-weight: 550; margin-bottom: 0.8rem; color: #0b1a2f;">❓ 常见问题摘要</h2>
+            <details>
+                <summary>这个知识库和主站是什么关系？</summary>
+                <p>它是基于 <a href="https://zh-en-500.com">500万彩票网</a> 内容整理出的静态介绍页，用于快速了解站点结构，不替代主站功能。</p>
+            </details>
+            <details>
+                <summary>页面内容会实时更新吗？</summary>
+                <p>本页为定期人工整理版本，并非实时同步。建议以主站最新信息为准。</p>
+            </details>
+            <details>
+                <summary>我能否把这里当作常用入口？</summary>
+                <p>完全可以。本页保持简洁与稳定，适合作为跳转至 <a href="https://zh-en-500.com">500万彩票网</a> 的中转页。</p>
+            </details>
+        </section>
+
+        <div class="footer-note">
+            © 知识库入口 · 基于 <a href="https://zh-en-500.com">500万彩票网</a> 内容整理
+        </div>
+    </main>
+</body>
+</html>
